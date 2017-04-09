@@ -27,14 +27,14 @@ The instructions for 0x7FE8 to 0x7FF3 of D2gfx.dll look like this:
 C7 00 80020000          mov [eax], 00000280         ; move the value 640 into the value storing the screen width
 C7 01 E0010000          mov [eax], 000001E0         ; move the value 480 into the value storing the screen height
 ```
-This instruction resizes the Diablo II game window when it detects a resolution change. Leaving these instrcutions unaltered will not crash the game, but it causes the game to crunch the elements together into a resolution that it cannot fit. This affects the way the game perceives the mouse position and UI elements. The mouse cannot move past the 640th x-position and the 480th y-position of the game window. It also creates terrible looking black lines.
+These instructions resize the Diablo II game window when it detects a resolution change. Leaving these instrcutions unaltered will not crash the game, but it causes the game to crunch the elements together into a resolution that it cannot fit. This affects the way the game perceives the mouse position and UI elements. The mouse cannot move past the 640th x-position and the 480th y-position of the game window. It also creates terrible looking black lines.
 
-Solution:
+#### Solution:
 ```markup
 C7 00 2A040000          mov [eax], 0000042A         ; move the value 1066 into the value storing the screen width
 C7 01 58020000          mov [eax], 00000258         ; move the value 600 into the value storing the screen height
 ```
-### Modifying D2gdi.dll
+### Modifying D2gdi.dll, Part 1
 There are two modifications that need to be made for this file. The first modification goes to the instructions from 0x6D55 to 0x6D5E of D2gdi.dll.
 ```markup
 BE 80020000         mov [eax], 00000280         ; move the value 640 into the value storing the game's width render
@@ -42,24 +42,40 @@ BE E0010000         mov [eax], 000001E0         ; move the value 480 into the va
 ```
 These instructions set the values used to determine how Diablo II should render the game. If unaltered, the screen will stretch the 640x480 resolution to cover the extra space added to the display window. Oh yeah, and the game crashes shortly afterward.
 
-Solution:
+#### Solution:
 ```markup
 BE 28040000         mov [eax], 00000428         ; move the value 1064 into the value storing the game's width render
 BE 58020000         mov [eax], 00000258         ; move the value 600 into the value storing the game's height render
 ```
 Note that the width that was entered was **1064**. For some reason, entering anything higher than 1064 will cause the width rendering to overflow onto the left side of the screen. Despite this minor quirk, this fix forces Diablo II to actually render the full 1066x600 resolution instead of some stretched hybrid.
-
+### Modifying D2gdi.dll, Part 2
 The next instruction to modify is at the instruction from 0x706B to 0x7074 of D2gdi.dll.
 ```markup
 C7 05 9CCA876F 80020000         mov [eax], 00000280         ; move the value 640 into the value storing the x-position where the game should stop rendering
 ```
-This instruction tells Diablo II where to stop rendering entities such as wall or pillars. If left unmodified, anything past the x-position at 640 will not be rendered, or at least correctly. The game won't crash, at least.
+This instruction sets up where Diablo II should stop rendering entities such as wall or pillars. If left unmodified, anything past the x-position at 640 will not be rendered, or at least correctly. The game won't crash, at least.
 
-Solution:
+#### Solution:
 ```markup
 C7 05 9CCA876F 2A040000         mov [eax], 0000042A         ; move the value 1066 into the value storing the x-position where the game should stop rendering
 ```
-### Modifying D2client.dll
+### Modifying D2client.dll, Part 1
+Now that all of the rendering problems are ironed out, the main issue to tackle is the game logic, held together by D2client.dll. Here are the instructions from 0x10E29 to 0x10E3C:
+```markup
+B8 80020000                     mov eax, 00000280                             ; move the value 640 into the eax register
+A3 48BCB86F                     mov [D2Client.dll+0xDBC48], eax               ; move the value of eax into the value storing the game's logic for width
+C7 05 4CBCB86F E0010000         mov [D2Client.dll+0xDBC4C], 000001E0          ; move the value 480 into the value storing the game's logic for height
+```
+These instructions sets up the game logic for Diablo II's field of vision, the character and map positioning, and how to position certain UI elements. If left unmodified, the game will render the game as if it were in 640x480 mode by placing the game on the upper left side of the window.
+
+### Solution:
+```markup
+B8 2A040000                     mov eax, 0000042A                             ; move the value 1066 into the eax register
+A3 48BCB86F                     mov [D2Client.dll+0xDBC48], eax               ; move the value of eax into the value storing the game's logic for width, Note that this is unmodified
+C7 05 4CBCB86F 58020000         mov [D2Client.dll+0xDBC4C], 00000258          ; move the value 600 into the value storing the game's logic for height
+```
+### Modifying D2client.dll, Part 2
+The game is ready to play, except that the inventory UI display panels is somewhat wacky. Quest buttons, waypoint buttons, and mercenary stats do not align correctly.
 
 
 TODO
