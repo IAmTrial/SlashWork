@@ -19,10 +19,28 @@ Diablo II has several hardcoded values that determine which resolution mode it s
 
 By opening up Cheat Engine, I needed to locate the instruction pointers for instructions that are associated with setting 640x480 resolution values. The easiest way to do this was by changing the resolution and finding out which values were altered.
 
+There were three files that must be modified in order to enable HD mode. These files are D2gfx.dll, D2gdi.dll, and D2client.dll.
+
+### Modifying D2gfx.dll 
+The instruction pointer 0x7FE8 to 0x7FF3 of D2gfx.dll looks like this:
+```markup
+C7 00 80020000        mov [eax], 00000280         ; move the value 640 into the value storing the screen width
+C7 01 E0010000        mov [eax], 000001E0         ; move the value 480 into the value storing the screen height
+```
+This instruction resizes the Diablo II game window when it detects a resolution change. Leaving these instrcutions unaltered will not crash the game, but it causes the game to crunch the elements together into a resolution that it cannot fit. This affects the way the game perceives the mouse position and UI elements. The mouse cannot move past the 640th x-position and the 480th y-position of the game window. It also creates terrible looking black lines.
+
+So the solution was this:
+```markup
+C7 00 2A040000        mov [eax], 0000042A         ; move the value 1066 into the value storing the screen width
+C7 01 58020000        mov [eax], 00000258         ; move the value 600 into the value storing the screen height
+```
+
+
+0x6D55 and 0x706B of D2gdi.dll
+0xDCD0 of D2glide.dll
+
 TODO
 0xC3A11 of D2client.dll for menu tab positioning
 0x10E29 of D2client.dll
-0x7FE8 of D2gfx.dll
-0x6D55 and 0x706B of D2gdi.dll
-0xDCD0 of D2glide.dll
+
 
