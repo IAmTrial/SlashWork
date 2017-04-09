@@ -20,3 +20,9 @@ Diablo II has several hardcoded values that determine which resolution mode it s
 By opening up Cheat Engine, I needed to locate the instruction pointers for instructions that are associated with setting 640x480 resolution values. The easiest way to do this was by changing the resolution and finding out which values were altered.
 
 TODO
+0xC3A11 of D2client.dll for menu tab positioning
+0x10E29 of D2client.dll
+0x7FE8 of D2gfx.dll
+0x6D55 and 0x706B of D2gdi.dll
+0xDCD0 of D2glide.dll
+
