@@ -1,7 +1,7 @@
 # Diablo 2 Widescreen Hack
 
 ## Quick Description of the Why
-Diablo II was released in 2001 to only support 640x480. One year later, the expansion, Lord of Destruction, added 800x600 resolution to the game. These resolutions use 4:3 aspect ratio. And after that, Blizzard never added more any new resolutions.
+Diablo II was released in 2000 to only support 640x480. One year later, the expansion, Lord of Destruction, added 800x600 resolution to the game. These resolutions use 4:3 aspect ratio. And after that, Blizzard never added more any new resolutions.
 
 Oh yeah, and modern computer monitors now handle resolutions better than that. And Sven wrote the Glide to OpenGL wrapper, which opens up Diablo II's graphical features to people who don't own 3dfx GPUs. A few hackers also released D2MultiRes, which allows Diablo II to be played at any resolution, but it only officially supported version 1.12.
 
