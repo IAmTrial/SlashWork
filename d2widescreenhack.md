@@ -8,7 +8,7 @@ Oh yeah, and modern computer monitors now handle resolutions better than that. A
 Most people don't use monitors with the 4:3 aspect ratio. Nowadays, the 16:9 aspect ratio has become more widespread. Some even own monitors with the 21:9 aspect ratio! It would be nice if Diablo II could natively support the 16:9 aspect ratio without stretching the display or putting black bars to the sides.
 
 ## More Recent/Relevant History Leading Up to the Hack
-On April 23, 2014 Reddit user /u/TravHatesMe released a hack at /r/SlashDiablo that allows Diablo II to be played at 1300x700 resolution, but required version 1.13**d**. Most players on /r/SlashDiablo were playing the game on version 1.13**c**. The fact that the hack had massive amounts of graphical bugs didn't help either. Two years passed, and I, /u/IAmTrial took the liberty of adding several fixes to the code that improve the overall graphics display, fixed item movement macros, and backported the hack to version 1.13c. After getting approval from /u/kaesekuchenx3 aka PhyRaX, I released the fixed hack to /r/SlashDiablo.
+On April 23, 2014 Reddit user /u/TravHatesMe released a hack at /r/SlashDiablo that allows Diablo II to be played at 1300x700 resolution.  Although most players on /r/SlashDiablo were playing the game on version 1.13**c**, the hack required version 1.13**d**. The fact that the hack had massive amounts of graphical bugs didn't help either. Two years passed, and I, /u/IAmTrial took the liberty of adding several fixes to the code that improve the overall graphics display, fixed item movement macros, and backported the hack to version 1.13c. After getting approval from /u/kaesekuchenx3 aka PhyRaX, I released the fixed hack to /r/SlashDiablo.
 
 A few folks at /r/SlashResurgence also wanted to get a port of the hack to their modded server, since the hack would crash with the mod. In addition, several users requested for a working Glide mode (and PlugY mode, credits to /u/updawg for requesting both). I asked /u/Fohg, the head moderator for permission...and this new hack was born.
 
@@ -34,6 +34,7 @@ These instructions resize the Diablo II game window when it detects a resolution
 C7 00 2A040000          mov [eax], 0000042A         ; move the value 1066 into the value storing the screen width
 C7 01 58020000          mov [ecx], 00000258         ; move the value 600 into the value storing the screen height
 ```
+
 ### Modifying D2gdi.dll, Part 1
 There are two modifications that need to be made for this file. The first modification goes to the instructions from 0x6D55 to 0x6D5E of D2gdi.dll.
 ```markup
@@ -48,6 +49,7 @@ BE 28040000         mov esi, 00000428         ; move the value 1064 into the val
 BE 58020000         mov edx, 00000258         ; move the value 600 into the value storing the game's height render
 ```
 Note that the width that was entered was **1064**. For some reason, entering anything higher than 1064 will cause the width rendering to overflow onto the left side of the screen. Despite this minor quirk, this fix forces Diablo II to actually render the full 1066x600 resolution instead of some stretched hybrid.
+
 ### Modifying D2gdi.dll, Part 2
 The next instruction to modify is at the instruction from 0x706B to 0x7074 of D2gdi.dll.
 ```markup
@@ -59,6 +61,7 @@ This instruction sets up where Diablo II should stop rendering entities such as 
 ```markup
 C7 05 9CCA876F 2A040000         mov [D2gdi.dll+0xCA9C], 0000042A          ; move the value 1066 into the value storing the x-position where the game should stop rendering
 ```
+
 ### Modifying D2client.dll, Part 1
 Now that all of the rendering problems are ironed out, the main issue to tackle is the game logic, held together by D2client.dll. Here are the instructions from 0x10E29 to 0x10E3C:
 ```markup
@@ -74,13 +77,14 @@ B8 2A040000                     mov eax, 0000042A                             ; 
 A3 48BCB86F                     mov [D2client.dll+0xDBC48], eax               ; move the value of eax into the value storing the game's logic for width, Note that this is unmodified
 C7 05 4CBCB86F 58020000         mov [D2client.dll+0xDBC4C], 00000258          ; move the value 600 into the value storing the game's logic for height
 ```
+
 ### Modifying D2client.dll, Part 2
 The game is ready to play, except that the UI panels display is somewhat wacky. Quest buttons, waypoint buttons, and mercenary stats do not align correctly. Here are the instructions directly responsible for 640x480 mode panel placement, which starts at 0xC3A11 and ends at 0xC3A1C.
 ```markup
 89 1D A0B9BC6F          mov [D2client.dll+0x11B9A0], ebx          ; move the value of ebx (which is 0) into the value that stores the x-offset positioning of panels
 89 1D A4B9BC6F          mov [D2client.dll+0x11B9A4], ebx          ; move the value of ebx (which is 0) into the value that stores the y-offset positioning of panels
 ```
-Now there's a problem. Moving a register into a memory location requires less bytes than moving a DWORD constant, which means that I need a total of 8 extra bytes if I want to add HD mode. While I could probably replace the entire set of instructions with a call to another function, and NOP the rest of the instructions, I went for a more simplistic route. Here is a much wider view of the instructions I could modify, spanning 0xC39F9 to 0xC3A1C:
+Now there's a problem. Moving a register into a memory location requires less bytes than moving a DWORD constant. This means that I need a total of 8 extra bytes if I want to add HD mode. One method I could emply is to replace the entire set of instructions with a call to another function and NOP the rest of the instructions. However, I opted for a differet route. Here is a much wider view of the instructions I could modify, spanning 0xC39F9 to 0xC3A1C:
 ```markup
 75 16                           jne D2client.dll+0xC3A11                      ; jump to 640x480 code if not 800x600 mode
 C7 05 A0B9BC6F 50000000         mov [D2client.dll+0x11B9A0], 00000050         ; move the value 80 into the value that stores the x-offset positioning of panels
@@ -89,7 +93,7 @@ EB 0C                           jmp D2client.dll+0xC3A1D                      ; 
 89 1D A0B9BC6F                  mov [D2client.dll+0x11B9A0], ebx              ; move the value of ebx (which is 0) into the value that stores the x-offset positioning of panels
 89 1D A4B9BC6F                  mov [D2client.dll+0x11B9A4], ebx              ; move the value of ebx (which is 0) into the value that stores the y-offset positioning of panels
 ```
-Here, we have a view of 800x600's code. What is convenient is that the height remains the same when switching from 800x600 mode to 1066x600 mode and vice versa. By reordering the code, I can reuse the code that sets up the y-offset positioning for 800x600 mode, which will then open up 6 bytes since the 640x480 mode y-offset code can be safely overridden. In addition, the total number of bytes that need to be written have been reduced from 8 bytes to 4 bytes. Now I can make my modifications.
+Here, we have a view of 800x600's code. What is convenient is that the height remains the same when switching from 800x600 mode to 1066x600 mode and vice versa. By reordering the code, I can reuse the code that sets up the y-offset positioning for 800x600 mode. This will then free up 6 bytes since the 640x480 mode y-offset code can be safely overridden. In addition, the total number of bytes that need to be written have been reduced from 8 bytes to 4 bytes. Now I can make my modifications.
 
 #### Solution:
 ```markup
@@ -103,6 +107,7 @@ EB 0C                           jmp D2client.dll+0xC3A1D                      ; 
 ```
 Now the game is ready to play at 1066x600 resolution...assuming that you run only windowed DirectDraw mode and that you have the proper TXT files for properly aligning the inventory elements. Oh yeah, and BH's item moving macros don't work anymore.
 
+## Fixing Sven's Glide mode
 
 TODO
 0xDCD0 of D2glide.dll
