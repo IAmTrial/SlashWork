@@ -48,7 +48,7 @@ These instructions set the values used to determine how Diablo II should render 
 BE 28040000         mov esi, 00000428         ; move the value 1064 into the value storing the game's width render
 BE 58020000         mov edx, 00000258         ; move the value 600 into the value storing the game's height render
 ```
-Note that the width that was entered was **1064**. For some reason, entering anything higher than 1064 will cause the width rendering to overflow onto the left side of the screen. Despite this minor quirk, this fix forces Diablo II to actually render the full 1066x600 resolution instead of some stretched hybrid.
+Note that the width that was entered was **1064**. For some reason, entering a width that is not a multiple of 4 will cause the width rendering to overflow onto the left side of the screen. Despite this minor quirk, this fix forces Diablo II to actually render the full 1066x600 resolution instead of some stretched hybrid.
 
 ### Modifying D2gdi.dll, Part 2
 The next instruction to modify is at the instruction from 0x706B to 0x7074 of D2gdi.dll.
@@ -125,3 +125,20 @@ C7 05 045B866F 58020000         mov [D2glide.dll+0x15A68], 00000258         ; Se
 ```
 
 ### Modifying glide3x.dll
+This one was the hardest to hack due to the fact that the relative instruction addresses that show up on Cheat Engine are not the same relative addresses that are shown in a hex editor. Regardless, here is the original code, located from 0xC0D5 to 0xC0EC in the hex editor (0xCAD5 to 0xCAEE in Cheat Engine):
+```assembly
+8B 15 A0C94100          mov edx, [0312C9A0]         ; Get the address for the Glide window width
+C7 02 80020000          mov [edx], 00000280         ; Set the Glide window width to 640
+8B 0D 2CC84100          mov ecx, [0312C82C]         ; Get the address for the Glide window height
+C7 01 E0010000          mov [ecx], 000001E0         ; Set the Glide window width to 480
+```
+The code changes Diablo II's window size.
+
+#### Solution:
+```assembly
+8B 15 A0C94100          mov edx, [0312C9A0]         ; Get the address for the Glide window width
+C7 02 80020000          mov [edx], 0000042A         ; Set the Glide window width to 1066
+8B 0D 2CC84100          mov ecx, [0312C82C]         ; Get the address for the Glide window height
+C7 01 E0010000          mov [ecx], 00000258         ; Set the Glide window width to 600
+```
+And now you are done! The game should run under 1066x600, though some other tweaks must be done manually to improve the visuals. Other than that, the game is now in full HD!
