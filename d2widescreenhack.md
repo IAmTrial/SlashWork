@@ -114,14 +114,14 @@ Unfortunately, starting the game in Glide mode will cause the window size to be 
 Here are what the instructions from 0xDCD5 to 0xDCE8 look like:
 ```assembly
 C7 05 685A866F 80020000         mov [D2glide.dll+0x15A68], 00000280         ; Set the rendering width to 640
-C7 05 045B866F E0010000         mov [D2glide.dll+0x15A68], 000001E0         ; Set the rendering height to 480
+C7 05 045B866F E0010000         mov [D2glide.dll+0x15B04], 000001E0         ; Set the rendering height to 480
 ```
 These instructions specifically tell the game to render entities using the specified width and height. Not changing this instruction results in entities being rendered at the incorrect location.
 
 #### Solution:
 ```assembly
 C7 05 685A866F 2A040000         mov [D2glide.dll+0x15A68], 0000042A         ; Set the rendering width to 1066
-C7 05 045B866F 58020000         mov [D2glide.dll+0x15A68], 00000258         ; Set the rendering height to 600
+C7 05 045B866F 58020000         mov [D2glide.dll+0x15B04], 00000258         ; Set the rendering height to 600
 ```
 
 ### Modifying glide3x.dll
