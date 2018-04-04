@@ -10,19 +10,19 @@ Over the years, additional contributors, including slippittydo, decker87, slayer
 
 ## Perceived Issues with BH
 
-While BH is great at providing all plenty of quality-of-life features that imrpove the rate at which players can progress through Diablo II, it is not without its faults.
+While BH is great at providing plenty of quality-of-life features that improve the rate at which players can progress through Diablo II, it is not without its faults.
 
-The hack is built using the Microsoft Visual C++ Compiler, which is a proprietary and Windows-centric. This affects Linux users who may want to compile the source code, but are not left with much of a choice when there are language extensions and constructs that only exist on that particular compiler. In addition, the compiler is developed at its own pace and often does not support new C++ language features as quickly as other C++ compilers.
+The hack was built using the Microsoft Visual C++ Compiler, which is proprietary and Windows-centric. This affects Linux users who may want to compile the source code, but are not left with much of a choice when there are language extensions and constructs that only exist on that particular compiler. In addition, the compiler is developed at its own pace and often does not support new C++ language features as quickly as other C++ compilers.
 
-The original BH was published in 2011. In addition, in the second half of 2011, C++11 had been approved, revamping many of the ways people write C++ code. It is evident in the BH source code that many of the features have been written using now obsolete, difficult-to-grasp, and dangerous patterns that make maintainence a nightmare.
+The original BH was published in 2011. In addition, in the second half of 2011, C++11 had been approved, revamping many of the ways people write C++ code. It is evident in the BH source code that many of the features have been written using now obsolete, difficult-to-grasp, and dangerous patterns that make maintenance a nightmare.
 
 ## License
 
 SlashDiablo Tools is licensed under the GNU Affero General Public License, version 3 or greater. But it was not always that way.
 
-As noted, the injector for BH has been licensed under the GNU Affero General Public License, version 3 or greater. Unfortunately, McGod has only added these notices to the injector and not the maphack itself. This ambiguity allows anyone to take the source code of the maphack, make modifications to improve it, and distribute the binaries while never publishing the source. This goes agaisnt the spirit of what this project has been founded upon.
+As noted, the injector for BH has been licensed under the GNU Affero General Public License, version 3 or greater. Unfortunately, McGod has only added these notices to the injector and not the maphack itself. This ambiguity allows anyone to take the source code of the maphack, make modifications to improve it, and distribute the binaries while never publishing the source. This goes against the spirit of what this project has been founded upon.
 
-To discourage this behavior, SlashDiablo Tools has been licensed under the GNU Affero General Public License, version 3 or greater. This effectively prevents anyone from directly using the souce code and redistributing binaries without providing the source code. Not only that, but if any of the source code or binaries are used for game servers, then that source must also be made available, as required by the *Affero* version of the GPL. If a violation of the license has been spotted, please contact the SlashDiablo or Diablo2Resurgence team on the appropriate Discord channels. 
+To discourage this behavior, SlashDiablo Tools has been licensed under the GNU Affero General Public License, version 3 or greater. This effectively prevents anyone from directly using the source code and redistributing binaries without providing the source code. Not only that, but if any of the source code or binaries are used for game servers, then that source must also be made available, as required by the *Affero* version of the GPL. If a violation of the license has been spotted, please contact the SlashDiablo or Diablo2Resurgence team on the appropriate Discord channels.
 
 ## Legal
 
