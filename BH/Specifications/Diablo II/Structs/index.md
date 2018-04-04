@@ -1,6 +1,6 @@
 # Diablo II Struct
 
-Data variables in Diablo II are often the standard C data types. However, in some instances, object oriented design was used to group together multiple variables that when put together, fulfilled one particular job.
+Data variables in Diablo II are often the standard C data types. However, in some instances, object oriented design was used to group together multiple variables that fulfilled one particular job.
 
 This article is shared with DataTables and Pakcets.
 
