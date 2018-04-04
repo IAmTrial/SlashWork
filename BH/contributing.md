@@ -30,13 +30,17 @@ The program is dependent on the following libraries:
 
 Do not use “#pragma comment” in order to add libraries to the linker. This is non-portable and only specific to the Microsoft Visual C++ Compiler!
 
-## Convention
+## Style Guidelines
 
 - All indentations are 4 spaces and no tabs.
 - The line limit is 80 characters, including whitespace and newline.
   - This is to discourage unnecessarily nested if-statements.
 - Systems Hungarian notation (dwId, szName) for naming variables is disallowed.
 - Apps Hunagarian is acceptable, depending on the circumstances (numItems, dPositionX).
+
+## Commit Messages
+
+All commit messages, must follow the guidelines described [here](https://web.archive.org/web/20180314204455/https://chris.beams.io/posts/git-commit/).
 
 ## License
 
