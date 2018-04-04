@@ -13,3 +13,14 @@ It is rather cumbersome having to maintain the entire function table, especially
 ## The Solution
 
 Provide a way to detect the game version in a consistent manner.
+
+## Methodology
+
+### Eliminated Methods
+
+Starting Diablo II, version 1.14, almost all dynamic-linked library (.dll) files have been eliminated. Thus, any attempt to read from those files is impractical.
+
+All other .dll files are useless, because they do not contain Diablo II’s version information. Diablo II.exe is also useless because this.
+
+Reading the version information from Game.exe directly using ReadProcessMemory could work, except that it is impractical because it needs to try every known address where the file version is known. This could be a problem when a game version is not defined.
+
