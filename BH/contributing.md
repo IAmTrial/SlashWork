@@ -14,4 +14,11 @@ For the Windows API, it is encouraged to use the “data types” that are defin
 
 The Diablo II API requires C code because it is accessing very low levels of memory, where everything needs to be written correctly and aligned properly in order to work. In addition, custom assembly code is necessary for interfacing with Diablo II and the benefits of C++ are not appropriate there. However, this applies to code that directly interfaces with Diablo II. Wrapper code is not eligible for this exception.
 
-Assembly code is written to match the architecture that Diablo II supports. Since x86 is the only architecture supported by Diablo II, there are some very important ground rules to address. x86 must be written using the Intel syntax, because that is the format used in many disassemblers. Writing it in AT&T syntax is a guaranteed way to incorporate confusion and violate consistency guidelines.
+Assembly code is written to match the architecture that Diablo II supports. Since x86 is the only architecture supported by Diablo II, there are some very important ground rules to address. x86 must be written using the Intel syntax, because that is the format used in many disassemblers. Writing assembly code in AT&T syntax is a guaranteed way to incorporate confusion and violate consistency guidelines.
+
+## Compiler
+
+The current primary compiler is MinGW-w64. This is not to be confused with MinGW (without w64), which is more than deficient in many language features, yet more than well-nourished with bugs. The second compiler of choice is the Clang LLVM Compiler. The third and final choice the Microsoft Visual C++ Compiler.
+
+The choice of compiler is important, because the linker must be able to properly locate the correct memory addresses for API calls. In addition, various function attributes and ways to write assembly code are specific to compilers. Luckily, GCC and LLVM maintain a great amount of compatibility with each other, such that even the linkers are the same.
+
