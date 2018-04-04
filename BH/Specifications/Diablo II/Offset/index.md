@@ -12,17 +12,15 @@ The input of offsets does not account for different versions of Diablo II. Porti
 
 ## The Solution
 
-Dynamically determine which offset to use, based on the version number. Add this offset to the associated module address in order to get the full target address.
+Determine the correct address to use for each variable or function.
 
 ### Dependencies
 
 - [Diablo II Version](../Version)
 
-## Methodology
-
 ### Current Active Method
 
-Grab the version number using the “Diablo II Version” and retrieve the correct address for that version.
+Dynamically determine which offset to use, based on the version number. Add this offset to the associated module address in order to get the full target address.
 
 ## Implementation
 
