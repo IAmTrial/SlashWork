@@ -24,3 +24,6 @@ All other .dll files are useless, because they do not contain Diablo II’s vers
 
 Reading the version information from Game.exe directly using ReadProcessMemory could work, except that it is impractical because it needs to try every known address where the file version is known. This could be a problem when a game version is not defined.
 
+### Currently Active Method
+
+The version information is read from Game.exe using Windows API functions. This enables consistent and dynamic retrieval of the game’s version string.
