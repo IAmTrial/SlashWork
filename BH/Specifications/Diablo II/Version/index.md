@@ -14,7 +14,9 @@ It is rather cumbersome having to maintain the entire function table, especially
 
 Provide an interface to detect the game version in a consistent manner.
 
-### Eliminated Methods
+## Implementation
+
+### Eliminated Implementations
 
 Starting Diablo II, version 1.14, almost all dynamic-linked library (.dll) files have been eliminated. Thus, any attempt to read from those files is impractical.
 
@@ -24,11 +26,9 @@ Reading the version information from Game.exe directly using ReadProcessMemory c
 
 Storing a hash of Game.exe and dynamically generating a hash for that file is impractical, because Game.exe could have as little as one bit changed, and the whole hash value changes. Also, the file used in hashing has to be located.
 
-### Current Method
+### Current Implementation
 
 The version information is read from Game.exe using Windows API functions. This enables consistent and dynamic retrieval of the game’s version string.
-
-## Implementation
 
 The Windows API functions used to detect versions require linking to the Version library.
 
