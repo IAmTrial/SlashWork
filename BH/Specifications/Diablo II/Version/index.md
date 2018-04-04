@@ -10,3 +10,6 @@ The original BH written very specifically for Diablo II 1.13c. All pointers to D
 
 It is rather cumbersome having to maintain the entire function table, especially when trying to keep the code bases up to date. Part of the problem is that the game does not provide some way to detect the version given ingame. Everything is compiled to work just for one specific version.
 
+## The Solution
+
+Provide a way to detect the game version in a consistent manner.
