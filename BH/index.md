@@ -2,11 +2,19 @@
 
 ## History
 
-Around 2011, the very first iteration of the BH maphack was written by McGod of the BlizzHackers forum, hence why it is often called BH. The source code and injector were made available to the public, with the injector licensed under the GNU Affero GPL, version 3.
+Around 2011, the very first iteration of the BH maphack for Diablo II was written by McGod of the BlizzHackers forum, hence why the hack is called BH. The source code and injector were made available to the public, with the injector licensed under the GNU Affero GPL, version 3.
 
 In 2011, Deadlock39 modified the BH hack (original post [here](https://web.archive.org/web/20180403231144/https://www.reddit.com/r/slashdiablo/comments/m1o5a/update_v012_for_bh_branch/)), customizing it for the SlashDiablo community. One year later, Underbent obtained a copy of the source code, made his changes for v1.1.3, and released those changes to the public (original post [here](https://web.archive.org/web/20180403231445/https://www.reddit.com/r/slashdiablo/comments/1286jz/bh_maphack_v013/)). The source code has been made available [here](https://github.com/underbent/slashdiablo-maphack).
 
 Over the years, additional contributors, including slippittydo, decker87, slayergod13, lolisquad, planqi, and Mir Drualga, added their own custom changes on top of the original hack, incorporating new features and fixing bug present in previous versions. This continued community development has allowed the maphack to become what it is today.
+
+## Perceived Issues with BH
+
+While BH is great at providing all plenty of quality-of-life features that imrpove the rate at which players can progress through Diablo II, it is not without its faults.
+
+The hack is built using the Microsoft Visual C++ Compiler, which is a proprietary and Windows-centric. This affects Linux users who may want to compile the source code, but are not left with much of a choice when there are language extensions and constructs that only exist on that particular compiler. In addition, the compiler is developed at its own pace and often does not support new C++ language features as quickly as other C++ compilers.
+
+The original BH was published in 2011. In addition, in the second half of 2011, C++11 had been approved, revamping many of the ways people write C++ code. It is evident in the BH source code that many of the features have been written using now obsolete, difficult-to-grasp, and dangerous patterns that make maintainence a nightmare.
 
 ## License
 
