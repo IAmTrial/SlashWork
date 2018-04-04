@@ -2,6 +2,8 @@
 
 Data variables in Diablo II are often the standard C data types. However, in some instances, object oriented design was used to group together multiple variables that when put together, fulfilled one particular job.
 
+This article is shared with DataTables and Pakcets.
+
 ## History
 
 Structs in BH share a somewhat similar story with [Diablo II Version](../Version). However, there are some key differences in how and why they are different. Compilers often implement structs by making them appear no different from simply defining their individual member variables in order. If a struct never changes this ordering, then its implementation in machine code won’t be different either.
