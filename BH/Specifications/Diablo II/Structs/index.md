@@ -23,3 +23,20 @@ Define a common data structure that provides a proper one-to-one equivalent to a
 ### Dependencies
 
 - [Diablo II Version](../Version)
+
+## Implementation
+
+### Eliminated Implementations
+
+Declaring a base struct and providing virtual functions through that struct has been tried before, with disastrous effects. The reason being that the compiler adds an extra variable if even one function is declared in the struct. Not only do data member locations have to be correct, but the struct size must also be correct. Thus, getting alignment with the corresponding Diablo II struct is impossible to achieve using this strategy.
+
+### Current Implementation
+
+One could create a class that interfaces with the structs across different versions. The individual structs from each version can be declared such that they are separate from each other, but linked together through inheritance. This allows them to be referenced in a polymorphic manner using a smart pointer. When this class is initialized, the correct struct is initialized at run time, using the detected GameVersion.
+
+To further abstract this concept, each individual struct is declared in their own separate header file. The declaration of the base struct is available in this header file. This base struct is always empty and uses the name of structs that are commonly defined by the Diablo II modding and hacking communities (e.g. struct D2Example). The version-specific structs are kept in the .cpp file and are given the same name as the base struct, but with the version identifier appended after an underscore (e.g. struct D2Example_113d). These version-specific implementations are child structs of the base struct. As for the class, it is declared in the header file and uses the same name as the base struct, but with “Ex” being the prefix to the type name (e.g. class ExD2Example). This class is referred to as the Ex class and was inspired by the naming scheme used by the developers of D2Ex2.
+
+The following are guarantees provided by the Ex class. All data members of the struct are accessible regardless of version differences. Each class provides functions that enable access or modification to all common data members. There is always one function that will return a raw C pointer to the underlying struct as a raw C pointer to the base struct. This allows users of the API to modify structs without having to worry about implementation details. In addition, the Diablo II functions can be further abstracted such that they take the “Ex” class and handle the raw C pointer from there.
+
+The Ex classes, depending on how their underlying struct behaves, can also contain additional functions that call Diablo II functions. This encourages object oriented design and reduces the need to know which Diablo II function to call for a specific struct.
+
