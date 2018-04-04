@@ -12,9 +12,7 @@ It is rather cumbersome having to maintain the entire function table, especially
 
 ## The Solution
 
-Provide a way to detect the game version in a consistent manner.
-
-## Methodology
+Provide an interface to detect the game version in a consistent manner.
 
 ### Eliminated Methods
 
@@ -26,7 +24,7 @@ Reading the version information from Game.exe directly using ReadProcessMemory c
 
 Storing a hash of Game.exe and dynamically generating a hash for that file is impractical, because Game.exe could have as little as one bit changed, and the whole hash value changes. Also, the file used in hashing has to be located.
 
-### Currently Active Method
+### Current Method
 
 The version information is read from Game.exe using Windows API functions. This enables consistent and dynamic retrieval of the game’s version string.
 
