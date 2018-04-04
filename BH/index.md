@@ -16,6 +16,14 @@ The hack was built using the Microsoft Visual C++ Compiler, which is proprietary
 
 The original BH was published in 2011. In addition, in the second half of 2011, C++11 had been approved, revamping many of the ways people write C++ code. It is evident in the BH source code that many of the features have been written using now obsolete, difficult-to-grasp, and dangerous patterns that make maintenance a nightmare.
 
+## Purpose of SlashDiablo Tools
+
+SlashDiablo Tools was created to incorporate all the various features provided by BH and others, while maintaining high standards for code. In order to maintain this standard, various areas are reconstructed with these newer, better practices in order to provide examples of what kind of expectations we have for each tool.
+
+The original BH keeps all of its code closely knit together. This type of pattern was acceptable for the original hack, simply on the basis that it “just works.” It was also constructed in this way so as to avoid being detected by Warden. However, BH appears to take approaches that are highly difficult to follow and could have been made more efficient in some areas. The issue of being detected by Warden is not an issue for SlashDiablo folks, since maphack is perfectly allowed.
+
+The approach that is taken is to maintain the original BH as the API to Diablo II. All modules are built as separate projects, dependent on the API. The API provides wrappers to enable access to any variable or function that is needed by a module. It is also version agnostic, meaning that the same code will “magically” work across the different versions of Diablo II. BH also provides the structures needed to construct custom patches.
+
 ## License
 
 SlashDiablo Tools is licensed under the GNU Affero General Public License, version 3 or greater. But it was not always that way.
