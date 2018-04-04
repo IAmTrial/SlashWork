@@ -18,17 +18,15 @@ Determine the correct address to use for each variable or function.
 
 - [Diablo II Version](../Version)
 
-### Current Active Method
-
-Dynamically determine which offset to use, based on the version number. Add this offset to the associated module address in order to get the full target address.
-
 ## Implementation
 
-## Eliminated Approach
+### Eliminated Implementations
 
 The different offsets were originally stored into one struct. However, this was faulty because this encouraged implicit declaration of offsets, without knowing which version each offset applies to. Not only that, but each and every offset definition was directly affected by the order of declaration. When a new version was added, this struct also had to be updated. Adding a new version entry at the center a struct would result in changing all declaration of offsets to be updated to realign the order.
 
-## Current Approach
+### Current Implementation
+
+Dynamically determine which offset to use, based on the version number. Add this offset to the associated module address in order to get the full target address.
 
 The enum GameVersion and an unordered map are used to locate the correct offset in constant time. The benefit of using GameVersion is that it is an enum class, which means that all key declarations are explicit. An unordered map, with GameVersion as the key and long long int as the key, provides the constant time lookup that the struct originally provided. In addition, the unordered map could have empty entries and still perform its job correctly. New versions can be added to GameVersion API and backwards compatibility is preserved.
 
