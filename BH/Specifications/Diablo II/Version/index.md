@@ -20,7 +20,7 @@ Provide a way to detect the game version in a consistent manner.
 
 Starting Diablo II, version 1.14, almost all dynamic-linked library (.dll) files have been eliminated. Thus, any attempt to read from those files is impractical.
 
-All other .dll files are useless, because they do not contain Diablo II’s version information. Diablo II.exe is also useless because this.
+All other .dll files are useless, because they do not contain Diablo II’s version information. Diablo II.exe is also useless because of this.
 
 Reading the version information from Game.exe directly using ReadProcessMemory could work, except that it is impractical because it needs to try every known address where the file version is known. This could be a problem when a game version is not defined.
 
@@ -32,10 +32,10 @@ The version information is read from Game.exe using Windows API functions. This 
 
 ## Implementation
 
-The Windows API functions used to detect versions requires linking to the Version library.
+The Windows API functions used to detect versions require linking to the Version library.
 
-Since version information can be and should be accessed globally, all calls to access the variables should be done with global functions, to prevent modification. In order to not pollute the global namespace, all functions are incorporated under a single namespace.
+Since version information can be and should be accessed globally, all calls to access the variables should be done with global functions, to prevent modification. In order to not pollute the global namespace, all functions are incorporated under a single namespace. These functions should also be accessed by modmakers creating works based on SlashDiablo Tools.
 
-Hardcoded version strings is unintuitive for contributors. An enum that represents version information, named GameVersion, is highly preferable because it offers explicitness. However, to prevent accidental implicit conversions from integers, the enum must be declared using enum class or enum struct.
+Hardcoded version strings is unintuitive for contributors. An enum that represents version information, named GameVersion, is highly preferable because it offers explicitness. However, to prevent accidental implicit conversions from integers, the enum is declared using enum class or enum struct.
 
 Lookup of the version string should take constant time. Thus, an unordered map is used to store a mapping of the version string to the corresponding GameVersion value. Pairs can be added to the version string map when needed. This interface is provided through a function.
