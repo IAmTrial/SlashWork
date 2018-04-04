@@ -11,3 +11,15 @@ Structs in BH share a somewhat similar story with [Diablo II Version](../Version
 This means that unlike offsets, which are different due to the compiler and linker, structs across multiple versions are different *on purpose* because the Diablo II developers modified the struct’s variable order. The developers don’t suffer in the same way that mod makers do, because they always have access to that particular variable using its identifier. Meanwhile, mod makers have to reverse engineer a struct to know the exact order a struct is implemented.
 
 It is also believed that these structs are actually originally classes, since C++ makes a very small distinction between the two. However, thanks to the compiler and its zero-cost abstractions, it is very difficult to know which functions were originally associated with which class.
+
+## The Problem
+
+Individual structs that have differences across versions must be redefined.
+
+## The Solution
+
+Define a common data structure that provides a proper one-to-one equivalent to a Diablo II struct, independent of game version.
+
+### Dependencies
+
+- [Diablo II Version](../Version)
