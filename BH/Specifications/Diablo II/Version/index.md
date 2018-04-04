@@ -29,3 +29,13 @@ Storing a hash of Game.exe and dynamically generating a hash for that file is im
 ### Currently Active Method
 
 The version information is read from Game.exe using Windows API functions. This enables consistent and dynamic retrieval of the game’s version string.
+
+## Implementation
+
+The Windows API functions used to detect versions requires linking to the Version library.
+
+Since version information can be and should be accessed globally, all calls to access the variables should be done with global functions, to prevent modification. In order to not pollute the global namespace, all functions are incorporated under a single namespace.
+
+Hardcoded version strings is unintuitive for contributors. An enum that represents version information, named GameVersion, is highly preferable because it offers explicitness. However, to prevent accidental implicit conversions from integers, the enum must be declared using enum class or enum struct.
+
+Lookup of the version string should take constant time. Thus, an unordered map is used to store a mapping of the version string to the corresponding GameVersion value. Pairs can be added to the version string map when needed. This interface is provided through a function.
