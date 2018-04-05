@@ -26,7 +26,7 @@ Define a common data structure that provides a proper one-to-one equivalent to a
 
 ## Implementation
 
-### Eliminated Implementations
+### Eliminated Implementation(s)
 
 Declaring a base struct and providing virtual functions through that struct has been tried before, with disastrous effects. The reason being that the compiler adds an extra variable if even one function is declared in the struct. Not only do data member locations have to be correct, but the struct size must also be correct. Thus, getting alignment with the corresponding Diablo II struct is impossible to achieve using this strategy.
 
@@ -39,4 +39,3 @@ To further abstract this concept, each individual struct is declared in their ow
 The following are guarantees provided by the Ex class. All data members of the struct are accessible regardless of version differences. Each class provides functions that enable access or modification to all common data members. There is always one function that will return a raw C pointer to the underlying struct as a raw C pointer to the base struct. This allows users of the API to modify structs without having to worry about implementation details. In addition, the Diablo II functions can be further abstracted such that they take the “Ex” class and handle the raw C pointer from there.
 
 The Ex classes, depending on how their underlying struct behaves, can also contain additional functions that call Diablo II functions. This encourages object oriented design and reduces the need to know which Diablo II function to call for a specific struct.
-
