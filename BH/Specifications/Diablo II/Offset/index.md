@@ -20,7 +20,7 @@ Determine the correct address to use for each variable or function.
 
 ## Implementation
 
-### Eliminated Implementations
+### Eliminated Implementation(s)
 
 The different offsets were originally stored into one struct. However, this was faulty because this encouraged implicit declaration of offsets, without knowing which version each offset applies to. Not only that, but each and every offset definition was directly affected by the order of declaration. When a new version was added, this struct also had to be updated. Adding a new version entry at the center a struct would result in changing all declaration of offsets to be updated to realign the order.
 
