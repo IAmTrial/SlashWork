@@ -1,5 +1,10 @@
 # SlashDiablo Tools Project
 
+## Subdirectories
+
+- [Contributing Guide](Contributing/)
+- [Specifications](Specifications/)
+
 ## History
 
 Around 2011, the very first iteration of the BH maphack for Diablo II was written by McGod of the BlizzHackers forum, hence why the hack is called BH. The source code and injector were made available to the public, with the injector licensed under the GNU Affero GPL, version 3.
