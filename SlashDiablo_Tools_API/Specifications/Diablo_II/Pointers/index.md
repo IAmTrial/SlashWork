@@ -27,7 +27,7 @@ Separate functions and versions from each other. Eliminate stubs by abstracting 
 ### Dependencies
 
 - [Diablo II Offset](../Offset)
-- [Diablo II Struct](../Struct)
+- [Diablo II Structs](../Structs)
 - [Diablo II Version](../Version)
 
 ## Implementation
