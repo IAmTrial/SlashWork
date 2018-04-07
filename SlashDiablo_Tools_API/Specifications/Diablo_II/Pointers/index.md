@@ -14,7 +14,7 @@ The compiler for Diablo II, however, uses non-standard x86 calling conventions. 
 
 Another issue was that functions or variables could appear or disappear across versions. This could be problematic for version portability, as some mods or hacks could be heavily reliant on the behavior of certain functions or variables.
 
-For developers, every pointer, whether for functions or variables, were kept in the same header file (.h) and heavily relied on macros to generate code. Compilation times dragged on if anything in that file was changed.
+For developers, every pointer, whether for functions or variables, were kept in the same header file and heavily relied on macros to generate code. Compilation times dragged on if anything in that file was changed.
 
 ## The Problem
 
@@ -22,7 +22,7 @@ Diablo II pointers need to be version agnostic. Custom function declarations nee
 
 ## The Solution
 
-Separate functions and versions from each other. Eliminate stubs by abstracting the custom calling conventions. Functions and variables are declared using the header files, but the implementation is in the C++ file (.cpp).
+Separate functions and versions from each other. Eliminate stubs by abstracting the custom calling conventions. Functions and variables are declared using the header files, but the implementation is in the C++ file.
 
 ### Dependencies
 
@@ -38,7 +38,7 @@ Defining Diablo II variables using static initialization can lead to reading in 
 
 ### Current Implementation
 
-A namespace is declared for each DLL. In addition, a set of files, namely the header and C++ files, is used specifically for declaring functions. Another set is specifically for declaring variables.
+A namespace is declared for each dynamic-link library (.dll). In addition, a set of files, namely the header and C++ files, is used specifically for declaring functions. Another set is specifically for declaring variables.
 
 Offset is used to define Diablo II variables in a version agnostic way. Since variables are not as complex as functions and its signature cannot be easily invalidated across versions, Offset is acceptable for this purpose. The variable is declared in the header file, while its value is set in the C++ file.
 
