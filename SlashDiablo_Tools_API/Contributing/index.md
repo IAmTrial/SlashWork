@@ -32,11 +32,17 @@ Do not use “#pragma comment” in order to add libraries to the linker. This i
 
 ## Style Guidelines
 
+Mostly based on [Google's C++ Style Guide](https://google.github.io/styleguide/cppguide.html).
+
+However, these rules take precedence:
 - All indentations are 4 spaces and no tabs.
 - The line limit is 80 characters, including whitespace and newline.
-  - This is to discourage unnecessarily nested if-statements.
+  - This is to discourage unnecessarily nested block statements.
 - Systems Hungarian notation (dwId, szName) for naming variables is disallowed.
-- Apps Hunagarian is acceptable, depending on the circumstances (numItems, dPositionX).
+- Apps Hunagarian is acceptable, depending on the circumstances (num_items, d_position_x).
+
+However, the Diablo II API uses a slightly different convention:
+- Variables and functions are capitalized for each first letter of a word, including the first word.
 
 ## Commit Messages
 
