@@ -46,7 +46,7 @@ Instead of defining the variables using static initialization, for the reason st
 
 When the wrapper class is first dereferenced, then the correct offset for the current GameVersion is determined. This overloads the operators [all operators for dereferencing](http://en.cppreference.com/w/cpp/language/operator_member_access) and [conversion](http://en.cppreference.com/w/cpp/language/cast_operator) to its contained pointer type. Conversion is permitted to be implicit. This is done in the C++ file.
 
-The version agnostic function is declared in the header file. There may be multiple variants of this globally declared function, using “Ex” structs or “Ex” pointers, but there is always at least one declaration of the function that uses the exact same function arguments as the function it references. If a struct pointer is an argument, then use the base struct type. These header functions should be the only Diablo II API functions accessible by mod makers and hackers.
+The version agnostic function is declared in the header file. There may be multiple variants of this globally declared function, using Ex classes, but there is always at least one declaration of the function that uses the exact same function arguments as the function it references. If a struct pointer is an argument, then use the base struct type. These header functions should be the only Diablo II API functions accessible by mod makers and hackers.
 
 The implementation details are in the C++ file and are described below.
 
@@ -54,7 +54,7 @@ The standard procedure for each function is to first declare the function pointe
 
 Next, declare all of the version specific functions and all required stubs. Version specific functions are directly tied to the actual functions called by Diablo II. They are named using the original, non-Ex function’s name, but with the version identifier appended after an underscore (e.g. D2Client_Foo_1_13D). Stubs use the same scheme, but with an addition “_stub” appended to its identifier (e.g. D2Client_Foo_1_13D_stub). If any version of a function shares same function signature with other versions, then attach a comment indicating this and use the identifier with the lowest value (e.g. use 1.10 instead of 1.13d).
 
-Next, implement the header file function using a switch-case to check GameVersion and call the correct version specific function. Additional features may include conversions or retrieval of values for the “Ex” class.
+Next, implement the header file function using a switch-case to check GameVersion and call the correct version specific function. Additional features may include conversions or retrieval of values for the Ex class.
 
 Next, implement the version specific functions, which retrieve the correct function address using the offset found in the constexpr unordered map. If required, call the stub function, with the target function being the first argument.
 
