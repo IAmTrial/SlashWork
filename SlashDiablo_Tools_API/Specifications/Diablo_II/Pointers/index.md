@@ -29,3 +29,19 @@ Separate functions and versions from each other. Eliminate stubs by abstracting 
 - [Diablo II Offset](../Offset)
 - [Diablo II Struct](../Struct)
 - [Diablo II Version](../Version)
+
+## Implementation
+
+### Eliminated Implementation(s)
+
+Defining Diablo II variables using static initialization can lead to reading in uninitialized values. A static function that attempts to read the value of a statically initialized Diablo II variable may potentially read an undefined value. Thus, Diablo II variables shall not be implemented with statically initialization.
+
+### Current Implementation
+
+Offset is used to define Diablo II variables in a version agnostic way. Since variables are not as complex as functions and its signature cannot be easily invalidated across versions, Offset is acceptable for this purpose. The variable is declared in the header (.h) file, while its value is set in the code file (.cpp).
+
+The next section requires an external library type, [constexpr unordered map]( https://github.com/benjibc/constexpr_hash_map).
+
+Instead of defining the variables using static initialization, for the reason stated above, the variables are initialized when it is first needed. To achieve this, a wrapper class utilizing generics keeps track of all of the initialization values. The variables are declared constexpr and the wrapper class constructor is also declared constexpr. This guarantees construction on compile time and solves runtime static initialization.
+
+When the wrapper class is first dereferenced, then the correct offset for the current GameVersion is determined. This overloads the operators [all operators for dereferencing]( http://en.cppreference.com/w/cpp/language/operator_member_access) and [conversion]( http://en.cppreference.com/w/cpp/language/cast_operator) to its contained pointer type. Conversion is permitted to be implicit.
