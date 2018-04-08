@@ -50,7 +50,7 @@ The version agnostic function is declared in the header file. There may be multi
 
 The implementation details are in the C++ file and are described below.
 
-The standard procedure for each function is to first declare all of the version specific functions and all required stubs. Version specific functions are directly tied to the actual functions called by Diablo II. They are named using the original, non-Ex function’s name, but with the version identifier appended after an underscore (e.g. Foo_1_13D). Stubs use the same scheme, but with an addition “_stub” appended to its identifier (e.g. Foo_1_13D_stub). If any version of a function shares same function signature with other versions, then attach a comment indicating this and use the identifier with the lowest value (e.g. use 1.10 instead of 1.13d).
+The standard procedure for each function is to first declare all of the version specific functions and all required stubs. Version specific functions are directly tied to the actual functions called by Diablo II. They are named using the original, non-Ex function’s name, but with the version identifier appended after an underscore (e.g. Foo_1_13D). Stubs use the same scheme, but with an addition “_stub” appended to its identifier (e.g. Foo_1_13D_stub). If any version of a function shares same function signature with other versions, then attach a comment indicating this and use the identifier with the lowest value (e.g. use 1.10 instead of 1.13D).
 
 Next, implement the header file function using a switch-case to check GameVersion and call the correct version specific function. Additional features may include conversions or retrieval of values for the Ex class.
 
