@@ -40,11 +40,11 @@ Defining a wrapper class to encapsulate a variable also fails, because construct
 
 ### Current Implementation
 
-A namespace is declared for each dynamic-link library (.dll). In addition, a set of files, namely the header and C++ files, is used specifically for declaring functions. Another set is specifically for declaring variables.
-
 Offset is used to define Diablo II variables in a version agnostic way. Since variables are not as complex as functions and its signature cannot be easily invalidated across versions, Offset is acceptable for this purpose. The variable is declared in the header file, while its value is set in the C++ file.
 
-Variables are declared as functions that return a pointer to the intended Diablo II variable. This is somewhat confusing, but it is guaranteed to solve static initialization order issues. Inside this function, an unordered map containing all the pointers is declared and initialized. Next, a static variable containing the target pointer is declared and initialized using the GameVersion and the unordered map of pointers. Afterwards, the target pointer to the Diablo II variable is returned.
+A namespace is declared for each dynamic-link library (.dll). In addition, a set of files, namely the header and C++ files, is used specifically for declaring functions. Another set is specifically for declaring variables. Variables are kept in a sub-namespace called Vars, while the functions are in a sub-namespace called Funcs.
+
+Variables are declared in the header file as functions that return a pointer to the intended Diablo II variable. This is somewhat confusing, but it is guaranteed to solve static initialization order issues. Inside the C++ file, the function implementation contains an unordered map containing all of the pointers is declared and initialized. Next, a static variable containing the target pointer is declared and initialized using the GameVersion and the unordered map of pointers. Afterwards, the target pointer to the Diablo II variable is returned.
 
 The version agnostic function is declared in the header file. There may be multiple variants of this globally declared function, using Ex classes, but there is always at least one declaration of the function that uses the exact same function arguments as the function it references. If a struct pointer is an argument, then use the base struct type. These header functions should be the only Diablo II API functions accessible by mod makers and hackers.
 
