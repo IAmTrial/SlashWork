@@ -6,4 +6,4 @@ See [here](../Diablo_II/Version/). Patches were defined in such a way that they 
 
 ## The Problem
 
-
+Patches should detect the game version and should not execute for a game version that is not defined to work on that patch. In addition, patches on overlapping addresses should provide a useful error message for mod makers to resolve these issues.
