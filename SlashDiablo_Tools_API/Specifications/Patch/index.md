@@ -16,3 +16,11 @@ Detect the game version and do not execute a patch for a game version that is no
 
 - [Diablo II Offset](../Diablo_II/Offset/)
 - [Diablo II Version](../Diablo_II/Version/)
+
+## Implementation
+
+### Current Implementation
+
+All patches inherit from the abstract class BasePatch. BasePatch provides pure abstract functions to install a patch and restore the game code before a patch. It also provides a function to store the gam code before being overridden. The BasePatch is responsible for storing the Offset, which contains all the information needed to locate an address. It is also responsible for storing the patch size, since it uses the patch size to determine how many bytes of game code to save.
+
+The InterceptionPatch is a child class of BasePatch. Its main purpose is to replace game code with a call or jump to an interception function. For this, it stores the address of the target interception function and the assembly opcode used. On the x86 architecture, the patch size must be greater or equal to 5 bytes. These first 5 bytes are used to replace game code with the interception function call or jump. After 5 bytes, the game code is replaced with no op instructions.
