@@ -8,4 +8,4 @@ User configurations in BH were very flexible, offering the ability to customize 
 
 ## The Problem
 
-The configuration file must be named BH.cfg. No other differently named configuration file is used. The write command needs to be fully implemented ad functional.
+The configuration file must be named BH.cfg. No other differently named configuration file is used. There is no ingame write command.
