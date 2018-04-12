@@ -6,7 +6,7 @@ SlashDiablo Tools is a community effort to provide various features to improve t
 
 The primary language of choice for almost every case is C++, using the latest standard revision. This is to ensure that old language constructs can be replaced by newer, more efficient ones. Also, when discussing C++, this is strictly talking about C++ and *not* C.
 
-What we mean is that C language features are extremely discouraged and should be kept to a minimum as much as possible. Classic pointers, C-style arrays, and C character arrays are forbidden under almost all circumstances, because they can be safely replaced by smart pointers, std::array, and std::string/std::string_view, respectively. Struct is acceptable if all members are declared const.
+What we mean is that C language features are extremely discouraged and should be kept to a minimum as much as possible. Classic pointers, C-style arrays, and C character arrays are forbidden under almost all circumstances, because they can be safely replaced by smart pointers, std::array, and std::string/std::string_view, respectively. C-style arrays are permitted only when used as function arguments, but the size of that array must be passed in as the next argument. Declarations from rvalues, however, should use std::array wherever possible. Struct is acceptable if all members are declared const.
 
 The only times where C code is acceptable are in two areas: the Windows API and the Diablo II API. 
 	
