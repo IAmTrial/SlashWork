@@ -2,9 +2,9 @@
 
 Every change to the game's behavior is defined into a module. A module is customized specifically to make that one change and can be ignored if not desirable.
 
-# Implementation
+## Implementation
 
-## Current Implementation
+### Current Implementation
 
 The current implementation of module is very much the same as the one used in the past.
 
