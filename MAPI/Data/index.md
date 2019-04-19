@@ -1,7 +1,7 @@
 ---
 title: SlashWork
 ---
-[<<< Back](../)
+[<< Back](../)
 
 # Data
 Game data are scattered throughout the game's memory as variables and requires proper identification in order to allow modders to properly access and change their values.
