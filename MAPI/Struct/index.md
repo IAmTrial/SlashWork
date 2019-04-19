@@ -13,4 +13,4 @@ The wrapper does most of the heavy-lifting to ensure that version-specific behav
 
 The API abstraction class is a standalone class meant to be used by modders to create instances of the struct, and it is a child class of the wrapper. It provides an explicit constructor that allows modders to construct an instance of the struct in a version-independent manner. The element is stored in a std::unique_ptr to auto-free memory when it falls out of scope. It does not provide a constructor that takes a pointer to an instance of the struct. However, it makes a call to the base class's constructor to ensure that the inherited functions work correctly.
 
-The struct should be named similar to how it is used in the game code. The wrapper's name is based on the struct's name, but with the suffix "\_MAPI" to distinguish it from the original struct.
+The struct should be named similar to how it is used in the game code. The wrapper's name is based on the struct's name, but with the suffix "\_Wrapper" to distinguish it from the original struct. The API abstraction class is also based on the struct's name, but with the suffix "\_MAPI".
