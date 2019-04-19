@@ -26,3 +26,6 @@ For boolean-type variables, the variable should start with the "Is" or "Has" ver
 The declaration and definition of the variables should be kept in different places. The user should not need to know the underlying abstraction of the API. It is also beneficial to the compile time if the headers and the source were to be kept separate.
 
 Macros are a common way to quickly declare and define variables quickly, but they incur the cost of ramping up the compile time. In addition, they do not have the flexibility of individually identifying variables with data sizes that change between versions.
+
+## Address Definition
+In order to keep the file size small, the definition of addresses are not hardcoded into the API. Instead, addresses are read in from a table, with the name of the table matching the game version being played. The address table maintains the path to the associated dynamically linked library, the name of the address, the address locating type, and the address locating value.
