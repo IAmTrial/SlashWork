@@ -1,7 +1,7 @@
 ---
 title: SlashWork
 ---
-[<<< Back](../)
+[<< Back](../)
 
 # Function
 A game function is any block of code that can be called for repeated results. They must be properly identified before modders can safely use them in their own mods.
