@@ -1,8 +1,9 @@
 ---
 title: SlashWork
 ---
-# Configuration
+[<<< Back](../)
 
+# Configuration
 A user configuration should permit control of mod features, at the discretion of the mod authors. It is also just as important to standardize the configuration format to prevent inconsistencies between mod authors.
 
 ## Format
