@@ -1,6 +1,8 @@
 ---
 title: SlashWork
 ---
+[<<< Back](../)
+
 # Address
 In order to patch or identify data or functions, there needs to be a way to specify a location in game memory. Game addresses serve this purpose.
 
