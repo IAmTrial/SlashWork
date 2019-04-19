@@ -1,7 +1,7 @@
 ---
 title: SlashWork
 ---
-[<<< Back](../)
+[<< Back](../)
 
 # SlashGaming Modding API
 
