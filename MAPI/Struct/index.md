@@ -1,6 +1,7 @@
 ---
 title: SlashWork
 ---
+[<<< Back](../)
 # Struct
 Games utilize data structures to store multiple variables into one place, all to serve a very specific purpose. It is crucial to modders that these data structures are also made available to them.
 
