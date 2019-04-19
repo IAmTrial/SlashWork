@@ -1,7 +1,7 @@
 ---
 title: SlashWork
 ---
-[<<< Back](../)
+[<< Back](../)
 
 # Patch
 Custom game code is often used by modders to achieve changes not normally provided by the game engine. It is a must-have for mods that introduce significant changes.
