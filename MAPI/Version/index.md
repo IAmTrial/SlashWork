@@ -1,6 +1,8 @@
 ---
 title: SlashWork
 ---
+[<<< Back](../)
+
 # Version
 Some mods are heavily dependent on the game version being used. Sometimes, the mod can be made usable in more than one game version. It would be desirable if the mod was compatible across all versions of the game.
 
